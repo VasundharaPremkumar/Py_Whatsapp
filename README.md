@@ -1,73 +1,140 @@
-# WhatsApp Invitation Automation
+# WhatsApp Alumni Invitation Automation
 
-A simple yet practical automation project built to streamline bulk WhatsApp invitations for a college alumni event.
+An automation project built to streamline bulk WhatsApp outreach for a college alumni event using Python and Selenium.
 
-Instead of manually saving hundreds of phone numbers and sending individual invitation messages one by one, this project automates the process by sending personalized WhatsApp messages along with an invitation attachment/path automatically.
+This project was created during the organization of a **Young Alumni Meet** at JSS Science and Technology University. Instead of manually saving hundreds of phone numbers and sending invitations individually, this automation script sends personalized WhatsApp messages along with a PDF invitation attachment directly through WhatsApp Web.
 
-What would normally take several hours of repetitive work was completed in under an hour using automation.
+The entire outreach process that would normally take several hours was reduced to under an hour using automation.
 
 ---
 
-## Problem Statement
+## Project Overview
 
-During the organization of a Young Alumni Meet, sending invitations manually to hundreds of alumni through WhatsApp became time-consuming and inefficient.
+Managing alumni communication manually can be repetitive and time-consuming. This project automates the workflow by:
 
-This project was created to:
-- Reduce repetitive manual effort
-- Automate message delivery
-- Improve communication efficiency
-- Apply programming skills to solve a real-world problem
+- Reading contact details from an Excel sheet
+- Opening WhatsApp chats automatically
+- Sending personalized invitation messages
+- Attaching invitation PDFs
+- Skipping selected departments dynamically
+- Handling errors gracefully during execution
 
 ---
 
 ## Features
 
-- Automated WhatsApp message sending
-- Sends customized invitation text
-- Supports invitation attachment/file path sharing
-- Eliminates the need to manually save contacts
-- Reduces outreach time significantly
-- Simple and lightweight implementation
+- Bulk WhatsApp message automation
+- Personalized messages using recipient names
+- PDF invitation attachment support
+- Excel-based contact management
+- Automated browser interaction using Selenium
+- Department filtering logic
+- Exception handling for failed deliveries
+- Time-efficient outreach workflow
 
 ---
 
 ## Tech Stack
 
 - Python
-- WhatsApp Web Automation
-- PyAutoGUI / Selenium / PyWhatKit *(update based on your actual library used)*
+- Selenium WebDriver
+- Pandas
+- Pyperclip
+- WhatsApp Web
 
 ---
 
-## How It Works
+## How the Code Works
 
-1. The script reads recipient phone numbers.
-2. A predefined invitation message is prepared.
-3. The invitation file/path is attached or shared.
-4. WhatsApp Web is automatically opened.
-5. Messages are sent sequentially to all recipients.
+### 1. Load Contact Data
+The script reads alumni contact information from an Excel file using Pandas.
 
-This automation removes repetitive manual interaction and speeds up event outreach.
+```python
+df = pd.read_excel("new_contacts.xlsx")
+```
 
----
-
-## Use Case
-
-This project was developed for a real college event:
-**Young Alumni Meet Invitation Campaign**
-
-It demonstrates how automation can be applied to solve practical communication and coordination challenges.
+The Excel sheet contains:
+- Name
+- Phone Number
+- Department
 
 ---
 
-## Future Improvements
+### 2. Launch WhatsApp Web
+Chrome is opened using Selenium WebDriver and the user logs in by scanning the QR code.
 
-- CSV/Excel contact integration
-- Dynamic personalized messages
-- Scheduled message delivery
-- GUI interface
-- Error handling and logging
-- Media attachment optimization
+```python
+driver = webdriver.Chrome()
+driver.get("https://web.whatsapp.com")
+```
+
+---
+
+### 3. Filter Contacts
+The script skips recipients belonging to specific departments (e.g., ENV).
+
+```python
+if department.upper() == "ENV":
+    continue
+```
+
+---
+
+### 4. Generate Personalized Message
+Each recipient receives a customized invitation message using their name dynamically.
+
+```python
+message = f"Good afternoon, {name}..."
+```
+
+---
+
+### 5. Open WhatsApp Chat
+The script automatically opens the recipient’s WhatsApp chat using their phone number.
+
+```python
+url = f"https://web.whatsapp.com/send?phone=91{phone}"
+```
+
+---
+
+### 6. Attach Invitation PDF
+The invitation PDF is uploaded automatically through WhatsApp Web.
+
+```python
+file_input.send_keys(file_path)
+```
+
+---
+
+### 7. Send Message
+The script clicks the send button and delivers the invitation.
+
+```python
+send_btn.click()
+```
+
+---
+
+### 8. Error Handling
+If any contact fails, the script logs the error and continues execution without stopping the entire process.
+
+```python
+except Exception as e:
+```
+
+---
+
+## Folder Structure
+
+```bash
+├── slecect.py
+├── new_contacts.xlsx
+├── invite.pdf
+├── README.md
+├── requirements.txt
+└── LICENSE
+```
 
 ---
 
@@ -76,7 +143,7 @@ It demonstrates how automation can be applied to solve practical communication a
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/your-username/your-repository-name.git
 ```
 
 Install dependencies:
@@ -88,19 +155,53 @@ pip install -r requirements.txt
 Run the script:
 
 ```bash
-python main.py
+python slecect.py
 ```
+
+---
+
+## Requirements
+
+Create a `requirements.txt` file with:
+
+```txt
+pandas
+selenium
+pyperclip
+openpyxl
+```
+
+---
+
+## Real-World Impact
+
+This project demonstrates how automation can solve practical communication problems efficiently.
+
+### Result:
+- Reduced manual outreach effort drastically
+- Automated alumni invitation workflow
+- Saved several hours of repetitive work
+- Improved event coordination efficiency
+
+---
+
+## Future Improvements
+
+- CSV and Google Sheets integration
+- GUI dashboard
+- Scheduled messaging
+- Image and video attachment support
+- Contact validation
+- Logging and analytics
+- Multi-language message templates
 
 ---
 
 ## Important Note
 
-This project is intended for educational and productivity purposes only.
+This project is intended strictly for educational, organizational, and productivity purposes.
 
-Please ensure:
-- Recipients have consented to communication
-- Automation is used responsibly
-- WhatsApp usage policies are respected
+Please use automation responsibly and ensure compliance with WhatsApp policies and recipient consent guidelines.
 
 ---
 
@@ -108,4 +209,4 @@ Please ensure:
 
 **Vasundhara Premkumar**
 
-Built to simplify alumni outreach through automation.
+Built to simplify alumni outreach through practical automation.
