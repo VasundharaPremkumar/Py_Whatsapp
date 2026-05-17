@@ -1,0 +1,11 @@
+# Data handling and Excel file processing
+pandas>=2.0.0
+
+# Browser automation for WhatsApp Web interaction
+selenium>=4.0.0
+
+# Clipboard support for multiline message pasting
+pyperclip>=1.8.0
+
+# Excel file (.xlsx) support for pandas
+openpyxl>=3.1.0
