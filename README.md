@@ -155,7 +155,7 @@ pip install -r requirements.txt
 Run the script:
 
 ```bash
-python slecect.py
+python whatsapp_automation.py
 ```
 
 ---
