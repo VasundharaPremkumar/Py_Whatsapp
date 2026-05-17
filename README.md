@@ -128,7 +128,7 @@ except Exception as e:
 ## Folder Structure
 
 ```bash
-├── slecect.py
+├── whatsapp_automation.py
 ├── new_contacts.xlsx
 ├── invite.pdf
 ├── README.md
